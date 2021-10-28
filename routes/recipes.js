@@ -35,7 +35,9 @@ router.post('/', async (req, res) => {
         ingredients: req.body.ingredients,
         description: req.body.description
     })
-    saveImage(recipe, req.body.image)
+    if (req.body.image && req.body.image !== ''){
+        saveImage(recipe, req.body.image)
+    }
 
     try{
         const newRecipe = await recipe.save()
@@ -138,8 +140,8 @@ async function renderFormPage(res, recipe, form, hasError = false){
 }
 
 function saveImage(recipe, imageEncoded){
-    if(imageEncoded == null) return
-    const image = JSON.parse(JSON.stringify(imageEncoded))
+    //if(imageEncoded == null) return
+    const image = JSON.parse(imageEncoded)
     if(image && imageMimeTypes.includes(image.type)){
         recipe.image = new Buffer.from(image.data, 'base64')
         recipe.imageType = image.type 
