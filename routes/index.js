@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
+const Recipe = require('../models/recipe')
 
-router.get('/', (req, res) => {
-    res.render('index')
+router.get('/', async (req, res) => {
+    let recipes
+    try{
+        recipes = await Recipe.find().sort({ createAt: 'desc' }).limit(10).exec()
+    }catch{
+        recipes = []
+    }
+    res.render('index', { recipes: recipes })
 })
-
-const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
-const db = mongoose.connection
-db.on('error', error => console.error(error))
-db.once('open', () => console.log('Connected to Mongoose'))
 
 module.exports = router

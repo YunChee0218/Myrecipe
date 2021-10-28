@@ -1,0 +1,46 @@
+<div class="form-row">
+    <div class="form-item">
+        <label>Title</label>
+        <input type="text" name="title" value="<%= recipe.title %> ">
+    </div>
+    <div class="form-item">
+        <label>Category</label>
+        <select name="category">
+            <% categories.forEach(category => { %>
+                <% if(category.id === recipe.id){ %>
+                    <option selected label="<%= category.name %>" value="<% category.id %>">
+                <% } else { %>
+                    <option label="<%= category.name %>" value="<%= category.id %>"></option>
+                <% } %>
+            <% }) %> 
+        </select>
+    </div>
+    <div class="form-item">
+        <label>Create Date</label>
+        <input type="date" name="createDate" 
+                value="<%= recipe.createDate == null ? '': recipe.createDate.toISOString().split('T')[0] %>">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-item" >
+        <label>Ingredients</label>
+        <textarea name="ingredients" cols="30" rows="15"><%= recipe.ingredients %></textarea>
+    </div>
+    <div class="form-item">
+        <label>Description</label>
+        <textarea name="description" cols="30" rows="15"></textarea><%= recipe.description %></textarea>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-item form-item-no-grow">
+        <label>Image</label>
+        <input type="file" name="image" class="recipe-image filepond">
+    </div>
+</div>
+
+
+
+
+
+
