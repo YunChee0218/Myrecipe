@@ -140,9 +140,9 @@ async function renderFormPage(res, recipe, form, hasError = false){
 }
 
 function saveImage(recipe, imageEncoded){
-    //if(imageEncoded == null) return
+    if(imageEncoded == null) return
     const image = JSON.parse(imageEncoded)
-    if(image && imageMimeTypes.includes(image.type)){
+    if(image != null && imageMimeTypes.includes(image.type)){
         recipe.image = new Buffer.from(image.data, 'base64')
         recipe.imageType = image.type 
     }

@@ -18,11 +18,11 @@ const recipeSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    createAt:{
-        type: Date,
-        required: true,
-        default: Date.now
-    },
+    // createAt:{
+    //     type: Date,
+    //     required: true,
+    //     default: Date.now
+    // },
     image:{
         type: Buffer,
         required: true
